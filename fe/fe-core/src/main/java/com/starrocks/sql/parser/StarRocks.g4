@@ -295,6 +295,7 @@ alterClause
     | addFrontendClause
     | dropFrontendClause
     | modifyFrontendHostClause
+    | addComputeNodeClause
     ;
 
 createIndexClause
@@ -331,6 +332,10 @@ dropFrontendClause
 
 modifyFrontendHostClause
    : MODIFY FRONTEND HOST string TO string
+   ;
+
+addComputeNodeClause
+   : ADD COMPUTE NODE string (',' string)*
    ;
 
 // ------------------------------------------- DML Statement -----------------------------------------------------------
@@ -968,7 +973,7 @@ nonReserved
     : AFTER | AGGREGATE | ASYNC | AUTHORS | AVG | ADMIN
     | BACKEND | BACKENDS | BACKUP | BEGIN | BITMAP_UNION | BOOLEAN | BROKER | BUCKETS | BUILTIN
     | CAST | CATALOG | CATALOGS | CHAIN | CHARSET | CURRENT | COLLATION | COLUMNS | COMMENT | COMMIT | COMMITTED
-    | CONNECTION | CONNECTION_ID | CONSISTENT | COSTS | COUNT | CONFIG
+    | COMPUTE | CONNECTION | CONNECTION_ID | CONSISTENT | COSTS | COUNT | CONFIG
     | DATA | DATE | DATETIME | DAY | DISTRIBUTION | DUPLICATE | DYNAMIC
     | END | ENGINE | ENGINES | ERRORS | EVENTS | EXECUTE | EXTERNAL | EXTRACT | EVERY
     | FILE | FILTER | FIRST | FOLLOWING | FORMAT | FN | FRONTEND | FRONTENDS | FOLLOWER | FREE | FUNCTIONS

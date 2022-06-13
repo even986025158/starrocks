@@ -75,6 +75,7 @@ import com.starrocks.scheduler.persist.TaskRunStatusChange;
 import com.starrocks.server.GlobalStateMgr;
 import com.starrocks.statistic.AnalyzeJob;
 import com.starrocks.system.Backend;
+import com.starrocks.system.ComputeNode;
 import com.starrocks.system.Frontend;
 import com.starrocks.transaction.TransactionState;
 import org.apache.logging.log4j.LogManager;
@@ -422,6 +423,11 @@ public class EditLog {
                 case OperationType.OP_DELETE_REPLICA: {
                     ReplicaPersistInfo info = (ReplicaPersistInfo) journal.getData();
                     globalStateMgr.replayDeleteReplica(info);
+                    break;
+                }
+                case OperationType.OP_ADD_COMPUTE_NODE: {
+                    ComputeNode computeNode = (ComputeNode) journal.getData();
+                    GlobalStateMgr.getCurrentSystemInfo().replayAddComputeNode(computeNode);
                     break;
                 }
                 case OperationType.OP_ADD_BACKEND: {
@@ -1114,6 +1120,10 @@ public class EditLog {
 
     public void logFinishConsistencyCheck(ConsistencyCheckInfo info) {
         logEdit(OperationType.OP_FINISH_CONSISTENCY_CHECK, info);
+    }
+
+    public void logAddComputeNode(ComputeNode computeNode) {
+        logEdit(OperationType.OP_ADD_COMPUTE_NODE, computeNode);
     }
 
     public void logAddBackend(Backend be) {

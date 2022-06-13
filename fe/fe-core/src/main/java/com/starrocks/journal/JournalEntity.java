@@ -100,6 +100,7 @@ import com.starrocks.scheduler.persist.TaskRunStatus;
 import com.starrocks.scheduler.persist.TaskRunStatusChange;
 import com.starrocks.statistic.AnalyzeJob;
 import com.starrocks.system.Backend;
+import com.starrocks.system.ComputeNode;
 import com.starrocks.system.Frontend;
 import com.starrocks.transaction.TransactionState;
 import org.apache.logging.log4j.LogManager;
@@ -307,6 +308,11 @@ public class JournalEntity implements Writable {
             case OperationType.OP_BACKEND_STATE_CHANGE: {
                 data = new Backend();
                 ((Backend) data).readFields(in);
+                isRead = true;
+                break;
+            }
+            case OperationType.OP_ADD_COMPUTE_NODE: {
+                data = ComputeNode.read(in);
                 isRead = true;
                 break;
             }
