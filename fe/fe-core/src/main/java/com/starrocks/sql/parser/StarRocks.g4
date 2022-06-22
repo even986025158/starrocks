@@ -82,6 +82,7 @@ statement
     | showVariablesStatement                                                                #showVariables
 
     // privilege
+    | showNodesStatement                                                                    #showNodes
     | GRANT identifierOrString TO user                                                      #grantRole
     | GRANT IMPERSONATE ON user TO user                                                     #grantImpersonate
     | REVOKE identifierOrString FROM user                                                   #revokeRole
@@ -424,6 +425,10 @@ showDatabasesStatement
 
 showVariablesStatement
     : SHOW varType? VARIABLES ((LIKE pattern=string) | (WHERE expression))?
+    ;
+
+showNodesStatement
+    : SHOW COMPUTE NODES                                                       #showComputeNodes
     ;
 
 varType

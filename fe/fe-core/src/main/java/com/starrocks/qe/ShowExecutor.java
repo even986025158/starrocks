@@ -111,6 +111,7 @@ import com.starrocks.common.FeConstants;
 import com.starrocks.common.MetaNotFoundException;
 import com.starrocks.common.PatternMatcher;
 import com.starrocks.common.proc.BackendsProcDir;
+import com.starrocks.common.proc.ComputeNodeProcDir;
 import com.starrocks.common.proc.FrontendsProcNode;
 import com.starrocks.common.proc.PartitionsProcDir;
 import com.starrocks.common.proc.ProcNodeInterface;
@@ -133,6 +134,7 @@ import com.starrocks.server.MetadataMgr;
 import com.starrocks.sql.analyzer.PrivilegeChecker;
 import com.starrocks.sql.ast.ShowAnalyzeStmt;
 import com.starrocks.sql.ast.ShowCatalogsStmt;
+import com.starrocks.sql.ast.ShowComputeNodesStmt;
 import com.starrocks.statistic.AnalyzeJob;
 import com.starrocks.transaction.GlobalTransactionMgr;
 import org.apache.logging.log4j.LogManager;
@@ -265,11 +267,19 @@ public class ShowExecutor {
             handleShowUser();
         } else if (stmt instanceof ShowCatalogsStmt) {
             handleShowCatalogs();
+        } else if (stmt instanceof ShowComputeNodesStmt) {
+            handleShowComputeNodes();
         } else {
             handleEmtpy();
         }
 
         return resultSet;
+    }
+
+    private void handleShowComputeNodes() {
+        final ShowComputeNodesStmt showStmt = (ShowComputeNodesStmt) stmt;
+        List<List<String>> computeNodesInfos = ComputeNodeProcDir.getClusterComputeNodesInfos(showStmt.getClusterName());
+        resultSet = new ShowResultSet(showStmt.getMetaData(), computeNodesInfos);
     }
 
     private void handleShowMaterializedView() throws AnalysisException {

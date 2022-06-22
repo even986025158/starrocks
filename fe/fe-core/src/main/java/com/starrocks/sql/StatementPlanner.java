@@ -56,6 +56,7 @@ import com.starrocks.sql.ast.RevokeImpersonateStmt;
 import com.starrocks.sql.ast.RevokeRoleStmt;
 import com.starrocks.sql.ast.ShowAnalyzeStmt;
 import com.starrocks.sql.ast.ShowCatalogsStmt;
+import com.starrocks.sql.ast.ShowComputeNodesStmt;
 import com.starrocks.sql.ast.SubmitTaskStmt;
 import com.starrocks.sql.ast.UseStmt;
 import com.starrocks.sql.optimizer.OptExpression;
@@ -219,6 +220,7 @@ public class StatementPlanner {
                 || statement instanceof ShowCatalogsStmt
                 || statement instanceof ShowColumnStmt
                 || statement instanceof ShowCreateTableStmt
+                || statement instanceof ShowComputeNodesStmt
                 || statement instanceof ShowDbStmt
                 || statement instanceof ShowMaterializedViewStmt
                 || statement instanceof ShowTableStmt

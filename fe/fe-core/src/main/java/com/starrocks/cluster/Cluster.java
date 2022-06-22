@@ -136,6 +136,10 @@ public class Cluster implements Writable {
         }
     }
 
+    public List<Long> getComputeNodeIdList() {
+        return Lists.newArrayList(computeNodeIdSet);
+    }
+
     public List<Long> getBackendIdList() {
         return Lists.newArrayList(backendIdSet);
     }

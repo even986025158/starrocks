@@ -224,7 +224,7 @@ public class BackendsProcDir implements ProcDirInterface {
 
     @Override
     public boolean register(String name, ProcNodeInterface node) {
-        return false;
+        return true;
     }
 
     @Override

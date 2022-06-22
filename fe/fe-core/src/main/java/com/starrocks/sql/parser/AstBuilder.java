@@ -168,6 +168,7 @@ import com.starrocks.sql.ast.RevokeRoleStmt;
 import com.starrocks.sql.ast.SelectRelation;
 import com.starrocks.sql.ast.ShowAnalyzeStmt;
 import com.starrocks.sql.ast.ShowCatalogsStmt;
+import com.starrocks.sql.ast.ShowComputeNodesStmt;
 import com.starrocks.sql.ast.SubmitTaskStmt;
 import com.starrocks.sql.ast.SubqueryRelation;
 import com.starrocks.sql.ast.SyncRefreshSchemeDesc;
@@ -416,6 +417,11 @@ public class AstBuilder extends StarRocksBaseVisitor<ParseNode> {
         List<String> hostPorts =
                 context.string().stream().map(c -> ((StringLiteral) visit(c)).getStringValue()).collect(toList());
         return new DropComputeNodeClause(hostPorts);
+    }
+
+    @Override
+    public ParseNode visitShowComputeNodes(StarRocksParser.ShowComputeNodesContext context) {
+        return new ShowComputeNodesStmt();
     }
 
     @Override
