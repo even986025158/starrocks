@@ -296,6 +296,7 @@ alterClause
     | dropFrontendClause
     | modifyFrontendHostClause
     | addComputeNodeClause
+    | dropComputeNodeClause
     ;
 
 createIndexClause
@@ -336,6 +337,10 @@ modifyFrontendHostClause
 
 addComputeNodeClause
    : ADD COMPUTE NODE string (',' string)*
+   ;
+
+dropComputeNodeClause
+   : DROP COMPUTE NODE string (',' string)*
    ;
 
 // ------------------------------------------- DML Statement -----------------------------------------------------------
