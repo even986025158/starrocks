@@ -46,6 +46,8 @@ import java.lang.reflect.Field;
 public class SessionVariable implements Serializable, Writable, Cloneable {
     private static final Logger LOG = LogManager.getLogger(SessionVariable.class);
 
+    public static final String USE_COMPUTE_NODES = "use_compute_nodes";
+    public static final String PREFER_COMPUTE_NODE = "prefer_compute_node";
     public static final String EXEC_MEM_LIMIT = "exec_mem_limit";
 
     /**
@@ -231,6 +233,12 @@ public class SessionVariable implements Serializable, Writable, Cloneable {
 
     @VariableMgr.VarAttr(name = ENABLE_PIPELINE, alias = ENABLE_PIPELINE_ENGINE, show = ENABLE_PIPELINE_ENGINE)
     private boolean enablePipelineEngine = true;
+
+    @VariableMgr.VarAttr(name = USE_COMPUTE_NODES)
+    private int useComputeNodes = -1;
+
+    @VariableMgr.VarAttr(name = PREFER_COMPUTE_NODE)
+    private boolean preferComputeNode = false;
 
     @VariableMgr.VarAttr(name = RUNTIME_FILTER_SCAN_WAIT_TIME, flag = VariableMgr.INVISIBLE)
     private long runtimeFilterScanWaitTime = 20L;
@@ -578,6 +586,22 @@ public class SessionVariable implements Serializable, Writable, Cloneable {
 
     public void setStatisticCollectParallelism(int statisticCollectParallelism) {
         this.statisticCollectParallelism = statisticCollectParallelism;
+    }
+
+    public int getUseComputeNodes() {
+        return useComputeNodes;
+    }
+
+    public void setUseComputeNodes(int useComputeNodes) {
+        this.useComputeNodes = useComputeNodes;
+    }
+
+    public boolean isPreferComputeNode() {
+        return preferComputeNode;
+    }
+
+    public void setPreferComputeNode(boolean preferComputeNode) {
+        this.preferComputeNode = preferComputeNode;
     }
 
     public long getRuntimeFilterScanWaitTime() {
