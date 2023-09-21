@@ -55,6 +55,7 @@ public class QueryQueueManager {
             return;
         }
 
+
         long startMs = System.currentTimeMillis();
         boolean isPending = false;
         try {
