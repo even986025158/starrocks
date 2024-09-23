@@ -2618,10 +2618,6 @@ public class SessionVariable implements Serializable, Writable, Cloneable {
         return enableCompareForNull;
     }
 
-    public void setEnableCompareForNull(boolean enableCompareForNull) {
-        this.enableCompareForNull = enableCompareForNull;
-    }
-
     public long getSqlMode() {
         return sqlMode;
     }
